@@ -1,0 +1,1 @@
+This folder would be used to add all the routes that are required for the project
