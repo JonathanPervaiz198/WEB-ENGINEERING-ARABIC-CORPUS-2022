@@ -1,7 +1,7 @@
 const Student = require("../models/student.model");
 const pdf = require("html-pdf");
 const fs = require("fs");
-const options = { format: "A4" };
+const options = { format: "A4" }; 
 
 // test function
 exports.test = function A(req, res) {

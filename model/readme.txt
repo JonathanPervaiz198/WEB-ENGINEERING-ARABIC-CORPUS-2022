@@ -1,1 +1,0 @@
-This folder would be used to add all the models that are required for the project
