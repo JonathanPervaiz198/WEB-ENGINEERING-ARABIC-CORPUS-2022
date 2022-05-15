@@ -16,7 +16,7 @@ const db = require('./config/keys').mongoURI;
 // Connect to MongoDB
 mongoose
     .connect(
-        db, { useNewUrlParser: true, useUnifiedTopology: true }
+        db, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false}
     )
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
@@ -59,6 +59,9 @@ app.use(express.json())
 app.use('/', require('./routes/index.js'));
 app.use('/users', require('./routes/users.js'));
 app.use('/public', express.static('public'));
+app.use('/users/public', express.static('public'));
+
+
 
 const PORT = process.env.PORT || 5000;
 

@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+var multer = require('multer')
+var path = require('path')
+
 // Load User model
 const User = require('../models/User');
 const { forwardAuthenticated, ensureAuthenticated } = require('../config/auth');
@@ -9,6 +12,8 @@ const { forwardAuthenticated, ensureAuthenticated } = require('../config/auth');
 const user_controller = require("../controllers/registeredUser.controller");
 const books_controller = require("../controllers/booksController");
 const poems_controller = require("../controllers/poemsController");
+
+const editProfile_controller = require("../controllers/editProfileController");
 
 
 // Login Page
@@ -21,35 +26,36 @@ router.get('/register', forwardAuthenticated, (req, res) => res.render('register
 
 router.get('/mainscreen', ensureAuthenticated, (req, res) => res.render('mainScreen',{user: req.user}));
 
-router.get('/dashboard',(req,res) => res.render('dashboard',{user: req.user}));
+router.get('/dashboard',ensureAuthenticated,(req,res) => res.render('dashboard',{user: req.user}));
 
 
-router.get('/books',books_controller.show);
-router.get('/poems',poems_controller.show);
+router.get('/books', ensureAuthenticated, books_controller.show);
+router.get('/poems', ensureAuthenticated, poems_controller.show);
 
 //Management
-router.get('/manageBooks',books_controller.showforManaging);
-router.get('/managePoems',poems_controller.showforManaging);
+router.get('/manageBooks', ensureAuthenticated, books_controller.showforManaging);
+router.get('/managePoems', ensureAuthenticated, poems_controller.showforManaging);
 
 //Add Ons
-router.get('/reports',(req,res) => res.render('reports',{user: req.user}));
+router.get('/reports', ensureAuthenticated, (req,res) => res.render('reports',{user: req.user}));
 
 //Users Section
 /*router.get('/registeredUsers',(req,res) => res.render('registeredUsers',{user: req.user}));*/
-router.get('/registeredUsers',user_controller.show);
-router.get('/manageUsers',user_controller.showforManaging)
+router.get('/registeredUsers', ensureAuthenticated, user_controller.show);
+router.get('/manageUsers', ensureAuthenticated, user_controller.showforManaging)
 
 
+router.get('/editProfileView', ensureAuthenticated, editProfile_controller.show, (req,res) => res.render('editProfile',{user: req.user}))
+router.post('/editProfile',  ensureAuthenticated, editProfile_controller.upload, editProfile_controller.update, editProfile_controller.show)
 
-
-
+router.get('/editProfileView/security', (req,res) => res.render('security',{user: req.user}))
 
 // Register
 router.post('/register', (req, res) => {
-    const { name, email, password, password2 } = req.body;
+    const { firstname,lastname,username,phonenumber,dob, email, password, password2, image} = req.body;
     let errors = [];
 
-    if (!name || !email || !password || !password2) {
+    if (!firstname || !lastname || !username || !phonenumber || !dob || !email || !password || !password2) {
         errors.push({ msg: 'Please enter all fields' });
     }
 
@@ -64,10 +70,15 @@ router.post('/register', (req, res) => {
     if (errors.length > 0) {
         res.render('register', {
             errors,
-            name,
+            firstname,
+            lastname,
+            username,
+            phonenumber,
+            dob,
             email,
             password,
-            password2
+            password2,
+            image
         });
     } else {
         User.findOne({ email: email }).then(user => {
@@ -75,16 +86,26 @@ router.post('/register', (req, res) => {
                 errors.push({ msg: 'Email already exists' });
                 res.render('register', {
                     errors,
-                    name,
+                    firstname,
+                    lastname,
+                    username,
+                    phonenumber,
+                    dob,
                     email,
                     password,
-                    password2
+                    password2,
+                    image
                 });
             } else {
                 const newUser = new User({
-                    name,
+                    firstname,
+                    lastname,
+                    username,
+                    phonenumber,
+                    dob,
                     email,
-                    password
+                    password,
+                    image
                 });
 
                 bcrypt.genSalt(10, (err, salt) => {
