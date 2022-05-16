@@ -32,6 +32,10 @@ const UserSchema = new mongoose.Schema({
   image: { 
     type: String, 
     default: 0
+  },
+  verified: { 
+    type: Boolean, 
+    default: false
   }
 });
 
