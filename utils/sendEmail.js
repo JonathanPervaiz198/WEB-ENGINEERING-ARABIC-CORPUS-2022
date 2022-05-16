@@ -6,7 +6,7 @@ module.exports = async (email, subject, text) => {
 			service: 'gmail',
 			auth: {
 				user: 'kuch57bhi@gmail.com',
-				pass: 'Gazakovi10',
+				pass: 'Zainul10',
 			},
 		});
 
