@@ -4,6 +4,9 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 var multer = require('multer')
 var path = require('path')
+const Token = require("../models/token");
+const crypto = require("crypto");
+const sendEmail = require("../utils/sendEmail");
 
 // Load User model
 const User = require('../models/User');
@@ -122,11 +125,39 @@ router.post('/register', (req, res) => {
                                 res.redirect('/users/login');
                             })
                             .catch(err => console.log(err));
+                           const tok = crypto.randomBytes(32).toString("hex");
+                            const token = new Token({
+                                userId: newUser._id,
+                                token: tok,
+                            }).save();
+                            const url = `http://localhost:5000/users/${newUser.id}/verify/${tok}`;
+                            console.log(process.env.BASE_URL);
+                         sendEmail(newUser.email, "Verify Email", url);
                     });
                 });
             }
         });
     }
+});
+
+router.get("/:id/verify/:token/", async (req, res) => {
+	try {
+		const user = await User.findOne({ _id: req.params.id });
+		if (!user) return res.status(400).send({ message: "Invalid link" });
+
+		const token = await Token.findOne({
+			userId: user._id,
+			token: req.params.token,
+		});
+		if (!token) return res.status(400).send({ message: "Invalid link" });
+
+		await User.updateOne({ _id: user._id, verified: true });
+		await token.remove();
+
+		res.status(200).send({ message: "Email verified successfully" });
+	} catch (error) {
+		res.status(500).send({ message: "Internal Server Error" });
+	}
 });
 
 // Login
