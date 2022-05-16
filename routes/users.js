@@ -14,6 +14,7 @@ const books_controller = require("../controllers/booksController");
 const poems_controller = require("../controllers/poemsController");
 
 const editProfile_controller = require("../controllers/editProfileController");
+const editUser_controller = require("../controllers/editUsers.controller");
 
 
 // Login Page
@@ -24,9 +25,9 @@ router.get('/welcome', (req, res) => res.render('welcome'));
 // Register Page
 router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
 
-router.get('/mainscreen', ensureAuthenticated, (req, res) => res.render('mainScreen',{user: req.user}));
+router.get('/mainscreen', ensureAuthenticated, (req, res) => res.render('mainScreen', { user: req.user }));
 
-router.get('/dashboard',ensureAuthenticated,(req,res) => res.render('dashboard',{user: req.user}));
+router.get('/dashboard', ensureAuthenticated, (req, res) => res.render('dashboard', { user: req.user }));
 
 
 router.get('/books', ensureAuthenticated, books_controller.show);
@@ -37,22 +38,26 @@ router.get('/manageBooks', ensureAuthenticated, books_controller.showforManaging
 router.get('/managePoems', ensureAuthenticated, poems_controller.showforManaging);
 
 //Add Ons
-router.get('/reports', ensureAuthenticated, (req,res) => res.render('reports',{user: req.user}));
+router.get('/reports', ensureAuthenticated, (req, res) => res.render('reports', { user: req.user }));
 
 //Users Section
 /*router.get('/registeredUsers',(req,res) => res.render('registeredUsers',{user: req.user}));*/
 router.get('/registeredUsers', ensureAuthenticated, user_controller.show);
 router.get('/manageUsers', ensureAuthenticated, user_controller.showforManaging)
+router.get('/manageUsers/view/:id', ensureAuthenticated, editUser_controller.display)
+router.get('/manageUsers/delete/:id', ensureAuthenticated, editUser_controller.delete)
+router.get('/manageUsers/updateView/:id', ensureAuthenticated, editUser_controller.updateView)
+router.post('/manageUsers/update', ensureAuthenticated, editUser_controller.update)
 
 
-router.get('/editProfileView', ensureAuthenticated, editProfile_controller.show, (req,res) => res.render('editProfile',{user: req.user}))
-router.post('/editProfile',  ensureAuthenticated, editProfile_controller.upload, editProfile_controller.update, editProfile_controller.show)
+router.get('/editProfileView', ensureAuthenticated, editProfile_controller.show, (req, res) => res.render('editProfile', { user: req.user }))
+router.post('/editProfile', ensureAuthenticated, editProfile_controller.upload, editProfile_controller.update, editProfile_controller.show)
 
-router.get('/editProfileView/security', (req,res) => res.render('security',{user: req.user}))
+router.get('/editProfileView/security', (req, res) => res.render('security', { user: req.user }))
 
 // Register
 router.post('/register', (req, res) => {
-    const { firstname,lastname,username,phonenumber,dob, email, password, password2, image} = req.body;
+    const { firstname, lastname, username, phonenumber, dob, email, password, password2, image } = req.body;
     let errors = [];
 
     if (!firstname || !lastname || !username || !phonenumber || !dob || !email || !password || !password2) {

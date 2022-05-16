@@ -3,9 +3,35 @@ const Schema = mongoose.Schema;
 
 let UserSchema = new Schema(
   {
-    firstName: { type: String, required: true },
-    lastName: { type: String, required: true },
-    registrationDate: { type: Date, required: true }
+    firstname: {
+      type: String,
+      required: true
+    },
+    lastname: {
+      type: String,
+      required: true
+    },
+    username: {
+      type: String,
+      required: true
+    },
+    phonenumber: {
+      type: Number,
+      required: true
+    },
+    dob: {
+      type: Date,
+      required: true
+    },
+    email: {
+      type: String,
+      required: true
+    },
+    registrationDate: {
+      type: Date,
+      required: true,
+      default: Date.now()
+    }
   },
   {
     timestamps: true
