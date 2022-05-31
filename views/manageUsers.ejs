@@ -1,4 +1,3 @@
-
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -16,7 +15,10 @@
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="/users/mainscreen"><%= user.firstname %> <%= user.lastname %></a>
+        <a class="navbar-brand ps-3" href="/users/mainscreen">
+            <%= user.firstname %>
+                <%= user.lastname %>
+        </a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
@@ -53,7 +55,7 @@
                             Dashboard
                         </a>
                         <div class="sb-sidenav-menu-heading">Interface</div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
+                        <a class="nav-link collapsed" href="/users/registeredUsers">
                             <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                             Registered Users
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -126,6 +128,10 @@
                                         <a class="nav-link" href="500.html">500 Page</a>
                                     </nav>
                                 </div>-->
+                                <a class="nav-link collapsed" href="/users/manageUsers" aria-expanded="false" aria-controls="pagesCollapseError">
+                                    Users
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
 
                             </nav>
                         </div>
@@ -147,7 +153,8 @@
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
-                    <%= user.firstname %> <%= user.lastname %>
+                    <%= user.firstname %>
+                        <%= user.lastname %>
                 </div>
             </nav>
         </div>
@@ -162,80 +169,87 @@
                         </ol>
                     </div>
 
-                    <meta charset="UTF-8">
-                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-                    <meta name="viewport" content="width=<div class=" container ">
-        <div class="table-responsive ">
-            <div class="table-wrapper ">
-                <div class="table-title ">
-                    <div class="row ">
-                        <div class="col-sm-8 "><h2>User <b>Details</b></h2></div>
-                        <div class="col-sm-4 ">
-                            <div class="search-box ">
-                                <i class="material-icons ">&#xE8B6;</i>
-                                <input type="text " class="form-control " placeholder="Search&hellip; ">
+                    <div class="table-responsive ">
+                        <div class="table-wrapper ">
+                            <div class="table-title ">
+                                <div class="row ">
+                                    <div class="col-sm-8 ">
+                                        <h2>User <b>Details</b></h2>
+                                    </div>
+                                    <div class="col-sm-4 ">
+                                        <div class="search-box ">
+                                            <i class="material-icons ">&#xE8B6;</i>
+                                            <input type="text " class="form-control " placeholder="Search&hellip; ">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-striped table-hover table-bordered ">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">First Name</th>
+                                        <th scope="col">Last Name</th>
+                                        <th scope="col">Email</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% records.forEach(function(row,index){ %>
+                                        <tr>
+                                            <td>
+                                                <%= index + 1 %>
+                                            </td>
+                                            <td>
+                                                <%= row.firstname %>
+                                            </td>
+                                            <td>
+                                                <%= row.lastname %>
+                                            </td>
+                                            <td>
+                                                <%= row.email %>
+                                            </td>
+                                            <td>
+                                                <a href="/users/manageUsers/view/<%= row._id %> " class="view " title="View " data-toggle="tooltip "><i class="material-icons ">&#xE417;</i></a>
+                                                <a href="/users/manageUsers/updateView/<%= row._id %> " class="edit " title="Edit " data-toggle="tooltip "><i class="material-icons ">&#xE254;</i></a>
+                                                <a href="/users/manageUsers/delete/<%= row._id %>" class="delete " title="Delete " data-toggle="tooltip "><i class="material-icons ">&#xE872;</i></a>
+                                            </td>
+                                        </tr>
+                                        <% })%>
+                                </tbody>
+                            </table>
+
+
+                            <div class="clearfix ">
+                                <div class="hint-text ">Showing <b>2</b> out of <b>25</b> entries</div>
+                                <ul class="pagination ">
+                                    <li class="page-item disabled "><a href="# "><i class="fa fa-angle-double-left "></i></a></li>
+                                    <li class="page-item "><a href="# " class="page-link ">1</a></li>
+                                    <li class="page-item "><a href="# " class="page-link ">2</a></li>
+                                    <li class="page-item active "><a href="# " class="page-link ">3</a></li>
+                                    <li class="page-item "><a href="# " class="page-link ">4</a></li>
+                                    <li class="page-item "><a href="# " class="page-link ">5</a></li>
+                                    <li class="page-item "><a href="# " class="page-link "><i class="fa fa-angle-double-right "></i></a></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
-                <table class="table table-striped table-hover table-bordered ">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">First Name</th>
-                            <th scope="col">Last Name</th>
-                            <th scope="col">Registration Date</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% records.forEach(function(row,index){ %>
-                            <tr>
-                                <td><%= index + 1 %></td>
-                                <td><%= row.firstName %></td>
-                                <td><%= row.lastName %></td>
-                                <td><%= row.registrationDate %></td>
-                                <td>
-                                    <a href="# " class="view " title="View " data-toggle="tooltip "><i class="material-icons ">&#xE417;</i></a>
-                                    <a href="# " class="edit " title="Edit " data-toggle="tooltip "><i class="material-icons ">&#xE254;</i></a>
-                                    <a href="# " class="delete " title="Delete " data-toggle="tooltip "><i class="material-icons ">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <% })%>
-                    </tbody>
-                </table>
 
-
-                <div class="clearfix ">
-                    <div class="hint-text ">Showing <b>2</b> out of <b>25</b> entries</div>
-                    <ul class="pagination ">
-                        <li class="page-item disabled "><a href="# "><i class="fa fa-angle-double-left "></i></a></li>
-                        <li class="page-item "><a href="# " class="page-link ">1</a></li>
-                        <li class="page-item "><a href="# " class="page-link ">2</a></li>
-                        <li class="page-item active "><a href="# " class="page-link ">3</a></li>
-                        <li class="page-item "><a href="# " class="page-link ">4</a></li>
-                        <li class="page-item "><a href="# " class="page-link ">5</a></li>
-                        <li class="page-item "><a href="# " class="page-link "><i class="fa fa-angle-double-right "></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>        
-    </div>     
-                   
             </main>
-    <footer class="py-4 bg-light mt-auto ">
-        <div class="container-fluid px-4 ">
-            <div class="d-flex align-items-center justify-content-between small ">
-                <div class="text-muted ">Copyright &copy; Your Website 2022</div>
-                <div>
-                    <a href="# ">Privacy Policy</a> &middot;
-                    <a href="# ">Terms &amp; Conditions</a>
+            <footer class="py-4 bg-light mt-auto ">
+                <div class="container-fluid px-4 ">
+                    <div class="d-flex align-items-center justify-content-between small ">
+                        <div class="text-muted ">Copyright &copy; Your Website 2022</div>
+                        <div>
+                            <a href="# ">Privacy Policy</a> &middot;
+                            <a href="# ">Terms &amp; Conditions</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </footer>
         </div>
-    </footer>
-            </div>
-        </div>
+    </div>
     </div>
     <link rel="stylesheet " href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css " integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm " crossorigin="anonymous ">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js " crossorigin="anonymous "></script>

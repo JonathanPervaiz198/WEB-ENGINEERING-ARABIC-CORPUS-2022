@@ -18,7 +18,10 @@
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="/users/mainscreen"><%= user.firstname %> <%= user.lastname %></a>
+        <a class="navbar-brand ps-3" href="/users/mainscreen">
+            <%= user.firstname %>
+                <%= user.lastname %>
+        </a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
@@ -55,7 +58,7 @@
                             Dashboard
                         </a>
                         <div class="sb-sidenav-menu-heading">Interface</div>
-                        <a class="nav-link collapsed" href="/users/registeredUsers"     >
+                        <a class="nav-link collapsed" href="/users/registeredUsers">
                             <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                             Registered Users
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -73,7 +76,7 @@
                         </a>
                         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link" href="/users/books" >
+                                <a class="nav-link" href="/users/books">
                                     Books
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 </a>
@@ -125,6 +128,10 @@
                                         <a class="nav-link" href="500.html">500 Page</a>
                                     </nav>
                                 </div>-->
+                                <a class="nav-link collapsed" href="/users/manageUsers" aria-expanded="false" aria-controls="pagesCollapseError">
+                                    Users
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
 
                             </nav>
                         </div>
@@ -146,7 +153,8 @@
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
-                    <%= user.firstname %> <%= user.lastname %>
+                    <%= user.firstname %>
+                        <%= user.lastname %>
                 </div>
             </nav>
         </div>

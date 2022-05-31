@@ -19,6 +19,7 @@ const roles_controller = require("../controllers/rolecontroller");
 
 const editProfile_controller = require("../controllers/editProfileController");
 const updateRole_controller = require("../controllers/updateRoleController");
+const editUser_controller = require("../controllers/editUsers.controller");
 
 
 // Login Page
@@ -28,12 +29,15 @@ router.get('/welcome', (req, res) => res.render('welcome'));
 
 // Register Page
 router.get('/register', forwardAuthenticated, (req, res) => res.render('register'));
+
 router.get('/forgetpass', forwardAuthenticated, (req, res) => res.render('forgetpass'));
 router.get('/changepassword', forwardAuthenticated, (req, res) => res.render('changepassword'));
-router.get('/emailsuccess', forwardAuthenticated, (req, res) => res.render('emailsuccess'));let mail;
-router.get('/mainscreen', ensureAuthenticated, (req, res) => res.render('mainScreen',{user: req.user}));
+router.get('/emailsuccess', forwardAuthenticated, (req, res) => res.render('emailsuccess'));
+let mail;
+router.get('/mainscreen', ensureAuthenticated, (req, res) => res.render('mainScreen', { user: req.user }));
 
-router.get('/dashboard',ensureAuthenticated,(req,res) => res.render('dashboard',{user: req.user}));
+
+router.get('/dashboard', ensureAuthenticated, (req, res) => res.render('dashboard', { user: req.user }));
 
 
 router.get('/books', ensureAuthenticated, books_controller.show);
@@ -45,12 +49,17 @@ router.get('/managePoems', ensureAuthenticated, poems_controller.showforManaging
 router.get('/manageRoles', ensureAuthenticated, roles_controller.showforManaging);
 
 //Add Ons
-router.get('/reports', ensureAuthenticated, (req,res) => res.render('reports',{user: req.user}));
+router.get('/reports', ensureAuthenticated, (req, res) => res.render('reports', { user: req.user }));
 
 //Users Section
 /*router.get('/registeredUsers',(req,res) => res.render('registeredUsers',{user: req.user}));*/
 router.get('/registeredUsers', ensureAuthenticated, user_controller.show);
 router.get('/manageUsers', ensureAuthenticated, user_controller.showforManaging)
+router.get('/manageUsers/view/:id', ensureAuthenticated, editUser_controller.display)
+router.get('/manageUsers/delete/:id', ensureAuthenticated, editUser_controller.delete)
+router.get('/manageUsers/updateView/:id', ensureAuthenticated, editUser_controller.updateView)
+router.post('/manageUsers/update', ensureAuthenticated, editUser_controller.update)
+
 
 
 router.get('/editProfileView', ensureAuthenticated, editProfile_controller.show, (req,res) => res.render('editProfile',{user: req.user}))
@@ -58,11 +67,12 @@ router.post('/editProfile',  ensureAuthenticated, editProfile_controller.upload,
 router.get("/updateRoleView/:id", ensureAuthenticated, updateRole_controller.show, (req,res) => res.render('updateRole',{user: req.user}))
 router.post("/updateRole/:id",  ensureAuthenticated,  updateRole_controller.update)
 
-router.get('/editProfileView/security', (req,res) => res.render('security',{user: req.user}))
+
+router.get('/editProfileView/security', (req, res) => res.render('security', { user: req.user }))
 
 // Register
 router.post('/register', (req, res) => {
-    const { firstname,lastname,username,phonenumber,dob, email, password, password2, image} = req.body;
+    const { firstname, lastname, username, phonenumber, dob, email, password, password2, image } = req.body;
     let errors = [];
 
     if (!firstname || !lastname || !username || !phonenumber || !dob || !email || !password || !password2) {
@@ -132,14 +142,14 @@ router.post('/register', (req, res) => {
                                 res.redirect('/users/login');
                             })
                             .catch(err => console.log(err));
-                           const tok = crypto.randomBytes(32).toString("hex");
-                            const token = new Token({
-                                userId: newUser._id,
-                                token: tok,
-                            }).save();
-                            const url = `http://localhost:5000/users/${newUser.id}/verify/${tok}`;
-                            console.log(process.env.BASE_URL);
-                         sendEmail(newUser.email, "Verify Email", url);
+                        const tok = crypto.randomBytes(32).toString("hex");
+                        const token = new Token({
+                            userId: newUser._id,
+                            token: tok,
+                        }).save();
+                        const url = `http://localhost:5000/users/${newUser.id}/verify/${tok}`;
+                        console.log(process.env.BASE_URL);
+                        sendEmail(newUser.email, "Verify Email", url);
                     });
                 });
             }
@@ -147,27 +157,27 @@ router.post('/register', (req, res) => {
     }
 });
 
-router.get("/:id/verify/:token/", async (req, res) => {
-	try {
-		const user = await User.findOne({ _id: req.params.id });
-		if (!user) return res.status(400).send({ message: "Invalid link" });
+router.get("/:id/verify/:token/", async(req, res) => {
+    try {
+        const user = await User.findOne({ _id: req.params.id });
+        if (!user) return res.status(400).send({ message: "Invalid link" });
 
-		const token = await Token.findOne({
-			userId: user._id,
-			token: req.params.token,
-		});
-		if (!token) return res.status(400).send({ message: "Invalid link" });
+        const token = await Token.findOne({
+            userId: user._id,
+            token: req.params.token,
+        });
+        if (!token) return res.status(400).send({ message: "Invalid link" });
 
-		await User.updateOne({ _id: user._id, verified: true });
-		await token.remove();
+        await User.updateOne({ _id: user._id, verified: true });
+        await token.remove();
         req.flash(
             'success_msg',
             'E-Mail Verified'
         );
         res.redirect('/users/login');
-	} catch (error) {
-		res.status(500).send({ message: "Internal Server Error" });
-	}
+    } catch (error) {
+        res.status(500).send({ message: "Internal Server Error" });
+    }
 });
 
 // Login
@@ -206,7 +216,7 @@ router.get('/logout', (req, res) => {
 
 // Forget Password
 router.post('/forgetpass', (req, res) => {
-    const {email} = req.body;
+    const { email } = req.body;
     let errors = [];
 
     if (!email) {
@@ -233,36 +243,36 @@ router.post('/forgetpass', (req, res) => {
                     token: tok,
                 }).save();
                 const url = `http://localhost:5000/users/forgetpass/${user.id}/verify/${tok}`;
-             sendEmail(user.email, "Change Password", url);
-             res.render('emailsuccess');
+                sendEmail(user.email, "Change Password", url);
+                res.render('emailsuccess');
             }
         });
     }
 });
 
-router.get("/forgetpass/:id/verify/:token/", async (req, res) => {
-	try {
-		const user = await User.findOne({ _id: req.params.id });
-		if (!user) return res.status(400).send({ message: "Invalid link" });
+router.get("/forgetpass/:id/verify/:token/", async(req, res) => {
+    try {
+        const user = await User.findOne({ _id: req.params.id });
+        if (!user) return res.status(400).send({ message: "Invalid link" });
 
-		const token = await Token.findOne({
-			userId: user._id,
-			token: req.params.token,
-		});
-		if (!token) return res.status(400).send({ message: "Invalid link" });
+        const token = await Token.findOne({
+            userId: user._id,
+            token: req.params.token,
+        });
+        if (!token) return res.status(400).send({ message: "Invalid link" });
         await token.remove();
         var string = encodeURIComponent(user.email);
         mail = user.email;
         res.redirect('/users/changepassword');
-	} catch (error) {
-		res.status(500).send({ message: "Internal Server Error" });
-	}
+    } catch (error) {
+        res.status(500).send({ message: "Internal Server Error" });
+    }
 });
 
 
 // Change Password
 router.post('/changepassword', (req, res) => {
-    const {password, password2} = req.body;
+    const { password, password2 } = req.body;
     let errors = [];
 
     if (password != password2) {
@@ -290,19 +300,19 @@ router.post('/changepassword', (req, res) => {
                 });
             } else {
                 let pass = password;
-                async function main (){     
-                    await   User.updateOne({ _id: user._id, password: pass });
-                  }  
+                async function main() {
+                    await User.updateOne({ _id: user._id, password: pass });
+                }
                 bcrypt.genSalt(10, (err, salt) => {
                     bcrypt.hash(password, salt, (err, hash) => {
                         if (err) console.log("error");
                         pass = hash;
                         main();
                         req.flash('success_msg', 'Password Changed');
-                    res.redirect('/users/login');
+                        res.redirect('/users/login');
                     });
                 });
-                   
+
             }
         });
     }
