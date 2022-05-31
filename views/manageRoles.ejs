@@ -1,17 +1,15 @@
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Admin - View Books</title>
+    <title>ARABIC CORPUS - Manage Users</title>
     <link href="../public/css/styles.css" rel="stylesheet" />
-
-    <link rel="stylesheet" href="fonts/icomoon/style.css">
-    <link rel="stylesheet" href="../public/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../public/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../public/css/style.css">
-
+    <link rel="stylesheet" href="../public/css/managePoems.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
 </head>
 
@@ -55,7 +53,7 @@
                             Dashboard
                         </a>
                         <div class="sb-sidenav-menu-heading">Interface</div>
-                        <a class="nav-link collapsed" href="/users/registeredUsers">
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                             <div class="sb-nav-link-icon"><i class="fas fa-user"></i></div>
                             Registered Users
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
@@ -73,7 +71,7 @@
                         </a>
                         <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link" href="/users/books" >
+                                <a class="nav-link collapsed" href="/users/books">
                                         Books
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
@@ -106,7 +104,10 @@
                         </a>
                         <div class="collapse" id="collapseManagement" aria-labelledby="headingThree" data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link collapsed" href="/users/manageBooks">Books<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div></a>
+                                <a class="nav-link collapsed" href="/users/manageBooks">
+                                        Books
+                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                    </a>
                                 <!--<div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" href="login.html">Login</a>
@@ -114,7 +115,7 @@
                                         <a class="nav-link" href="password.html">Forgot Password</a>
                                     </nav>
                                 </div>-->
-                                <a class="nav-link collapsed" href="/users/managePoems" aria-expanded="false" aria-controls="pagesCollapseError">
+                                <a class="nav-link collapsed" href="/users/managePoems">
                                         Poems
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
@@ -130,7 +131,7 @@
                         </div>
 
                         <div class="sb-sidenav-menu-heading">Addons</div>
-                        <a class="nav-link" href="/users/reports">
+                        <a class="nav-link" href="charts.html">
                             <div class="sb-nav-link-icon"><i class="fas fa-chart-bar"></i></div>
                             Report
                         </a>
@@ -157,74 +158,88 @@
                         <h1 class="mt-4">ARABIC CORPUS - ADMIN</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item">F190910@nu.edu.pk</li>
-                            <li class="breadcrumb-item active"> <%= user.firstname %> <%= user.lastname %></li>
+                            <li class="breadcrumb-item active">Jonathan Pervaiz</li>
                         </ol>
-
                     </div>
 
-                    <div class="content">
-
-                        <div class="container">
-                            <h2 class="mb-5">Books <b> Record</h2>
-                            <div class="table-responsive">
-                                <table class="table custom-table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">
-                                                <label class="form-check-label">
-                                      <input type="checkbox" class="js-check-all"/>
-                                      
-                                    </label>
-                                            </th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Author</th>
-                                            <th scope="col">Publish Date</th>
-                                            <th scope="col">ISBN</th>
-                                            <th scope="col">Page Count</th>
-                                            <th scope="col">Word Count</th>
-                                            <th scope="col">Rating</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% records.forEach(function(row){ %>
-                                        <tr>
-                                            <th scope="row">
-                                                <label class="form-check-label">
-                                                    <input type="checkbox"/>
-                                                </label>
-                                            </th>
-                                            <td><%= row.name %></td>
-                                            <td><%= row.author %></td>
-                                            <td><%= row.publishDate %></td>
-                                            <td><%= row.isbn %></td>
-                                            <td><%= row.pageCount %></td>
-                                            <td><%= row.wordCount %></td>
-                                            <td><%= row.rating %></td>
-                                        </tr>
-                                        <% })%>
-                                        
-                                    </tbody>
-                                </table>
+                    <meta charset="UTF-8">
+                    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                    <meta name="viewport" content="width=<div class=" container ">
+        <div class="table-responsive ">
+            <div class="table-wrapper ">
+                <div class="table-title ">
+                    <div class="row ">
+                        <div class="col-sm-8 "><h2>User <b>Details</b></h2></div>
+                        <div class="col-sm-4 ">
+                            <div class="search-box ">
+                                <i class="material-icons ">&#xE8B6;</i>
+                                <input type="text " class="form-control " placeholder="Search&hellip; ">
                             </div>
                         </div>
                     </div>
                 </div>
-            </main>
-            <footer class="py-4 bg-light mt-auto">
-                <div class="container-fluid px-4">
-                    <div class="d-flex align-items-center justify-content-between small">
-                        <div class="text-muted">Copyright &copy; Your Website 2022</div>
-                        <div>
-                            <a href="#">Privacy Policy</a> &middot;
-                            <a href="#">Terms &amp; Conditions</a>
-                        </div>
-                    </div>
+                <table class="table table-striped table-hover table-bordered ">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Registration Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% records.forEach(function(row,index){ %>
+                            <tr>
+                                <td><%= index + 1 %></td>
+                                <td><%= row.firstname %></td>
+                                <td><%= row.lastname %></td>
+                                <td><%= row.role %></td>
+                                <td><%= row.dob %></td>
+                                <td>
+                                    <a href="/users/updateRoleView/<%=row._id%>" class="edit " title="Edit " data-toggle="tooltip "><i class="material-icons ">&#xE254;</i></a>
+                                </td>
+                            </tr>
+                            <% })%>
+                    </tbody>
+                </table>
+
+
+                <div class="clearfix ">
+                    <div class="hint-text ">Showing <b>2</b> out of <b>25</b> entries</div>
+                    <ul class="pagination ">
+                        <li class="page-item disabled "><a href="# "><i class="fa fa-angle-double-left "></i></a></li>
+                        <li class="page-item "><a href="# " class="page-link ">1</a></li>
+                        <li class="page-item "><a href="# " class="page-link ">2</a></li>
+                        <li class="page-item active "><a href="# " class="page-link ">3</a></li>
+                        <li class="page-item "><a href="# " class="page-link ">4</a></li>
+                        <li class="page-item "><a href="# " class="page-link ">5</a></li>
+                        <li class="page-item "><a href="# " class="page-link "><i class="fa fa-angle-double-right "></i></a></li>
+                    </ul>
                 </div>
-            </footer>
+            </div>
+        </div>        
+    </div>     
+                   
+            </main>
+    <footer class="py-4 bg-light mt-auto ">
+        <div class="container-fluid px-4 ">
+            <div class="d-flex align-items-center justify-content-between small ">
+                <div class="text-muted ">Copyright &copy; Your Website 2022</div>
+                <div>
+                    <a href="# ">Privacy Policy</a> &middot;
+                    <a href="# ">Terms &amp; Conditions</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+            </div>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-  
+    <link rel="stylesheet " href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css " integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm " crossorigin="anonymous ">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js " crossorigin="anonymous "></script>
+    <script src="../public/js/scripts.js "></script>
 </body>
 
 </html>

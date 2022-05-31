@@ -15,8 +15,10 @@ const { forwardAuthenticated, ensureAuthenticated } = require('../config/auth');
 const user_controller = require("../controllers/registeredUser.controller");
 const books_controller = require("../controllers/booksController");
 const poems_controller = require("../controllers/poemsController");
+const roles_controller = require("../controllers/rolecontroller");
 
 const editProfile_controller = require("../controllers/editProfileController");
+const updateRole_controller = require("../controllers/updateRoleController");
 
 
 // Login Page
@@ -38,8 +40,9 @@ router.get('/books', ensureAuthenticated, books_controller.show);
 router.get('/poems', ensureAuthenticated, poems_controller.show);
 
 //Management
-router.get('/manageBooks', ensureAuthenticated, books_controller.showforManaging);
+router.get('/manageBooks', ensureAuthenticated, books_controller.showforManaging);let Role;
 router.get('/managePoems', ensureAuthenticated, poems_controller.showforManaging);
+router.get('/manageRoles', ensureAuthenticated, roles_controller.showforManaging);
 
 //Add Ons
 router.get('/reports', ensureAuthenticated, (req,res) => res.render('reports',{user: req.user}));
@@ -52,6 +55,8 @@ router.get('/manageUsers', ensureAuthenticated, user_controller.showforManaging)
 
 router.get('/editProfileView', ensureAuthenticated, editProfile_controller.show, (req,res) => res.render('editProfile',{user: req.user}))
 router.post('/editProfile',  ensureAuthenticated, editProfile_controller.upload, editProfile_controller.update, editProfile_controller.show)
+router.get("/updateRoleView/:id", ensureAuthenticated, updateRole_controller.show, (req,res) => res.render('updateRole',{user: req.user}))
+router.post("/updateRole/:id",  ensureAuthenticated,  updateRole_controller.update)
 
 router.get('/editProfileView/security', (req,res) => res.render('security',{user: req.user}))
 
@@ -167,12 +172,29 @@ router.get("/:id/verify/:token/", async (req, res) => {
 
 // Login
 router.post('/login', (req, res, next) => {
+    const { firstname,lastname,username,phonenumber,dob, email, password, password2, image} = req.body;
+    User.findOne({ email: email }).then(user => {
+        if (!user) {
+            console.log("Fuck");
+           
+        } else {
+            Role = user.role;
+               
+        }
+    });
     passport.authenticate('local', {
         successRedirect: '/users/mainscreen',
         failureRedirect: '/users/login',
         failureFlash: true
     })(req, res, next);
 });
+
+function isAdmin(req, res, next) {
+    if (req.isAuthenticated() && (Role =='user')) {
+        return next();
+    }
+    return res.redirect(403, "/error");
+}
 
 // Logout
 router.get('/logout', (req, res) => {
