@@ -10,8 +10,8 @@ exports.show = async (req,res) => {
 }
 
 exports.update = async (req,res) => {
-  await User.findByIdAndUpdate({_id: req.params.id},{ $set: {role:req.body.role}})
-      console.log(req.body.role)
+  await User.findByIdAndUpdate({_id: req.params.id},{ $set: {role:req.body.your_role}})
+      console.log(req.body)
       console.log(req.params.id)
       res.redirect('/users/manageRoles')
         

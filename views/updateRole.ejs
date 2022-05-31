@@ -13,20 +13,27 @@
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="/users/mainscreen"><%= user.firstname %> <%= user.lastname %></a>
+        <a class="navbar-brand ps-3" href="/users/mainscreen">
+            <%= user.firstname %>
+                <%= user.lastname %>
+        </a>
         <!-- Sidebar Toggle-->
-        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+                class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
         <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
             <div class="input-group">
-                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..."
+                    aria-describedby="btnNavbarSearch" />
+                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i
+                        class="fas fa-search"></i></button>
             </div>
         </form>
         <!-- Navbar-->
         <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown"
+                    aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <li><a class="dropdown-item" href="#!">Settings</a></li>
                     <li><a class="dropdown-item" href="/users/editProfileView">Edit Profile</a></li>
@@ -56,7 +63,8 @@
                             Registered Users
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
+                        <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne"
+                            data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion">
                                 <a class="nav-link collapsed" href="layout-static.html">Static Navigation</a>
                                 <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
@@ -64,17 +72,20 @@
                         </div>
 
 
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages"
+                            aria-expanded="false" aria-controls="collapsePages">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                             Database
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
+                        <div class="collapse" id="collapsePages" aria-labelledby="headingTwo"
+                            data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link collapsed" href="/users/books" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                                        Books
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
+                                <a class="nav-link collapsed" href="/users/books" aria-expanded="false"
+                                    aria-controls="pagesCollapseAuth">
+                                    Books
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
                                 <!--<div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" href="login.html">Login</a>
@@ -82,10 +93,11 @@
                                         <a class="nav-link" href="password.html">Forgot Password</a>
                                     </nav>
                                 </div>-->
-                                <a class="nav-link collapsed" href="/users/poems" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        Poems
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
+                                <a class="nav-link collapsed" href="/users/poems" aria-expanded="false"
+                                    aria-controls="pagesCollapseError">
+                                    Poems
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
                                 <!--<div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" href="401.html">401 Page</a>
@@ -97,14 +109,18 @@
                             </nav>
                         </div>
 
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseManagement" aria-expanded="false" aria-controls="collapseManagement">
+                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse"
+                            data-bs-target="#collapseManagement" aria-expanded="false"
+                            aria-controls="collapseManagement">
                             <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
                             Management
                             <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                         </a>
-                        <div class="collapse" id="collapseManagement" aria-labelledby="headingThree" data-bs-parent="#sidenavAccordion">
+                        <div class="collapse" id="collapseManagement" aria-labelledby="headingThree"
+                            data-bs-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                                <a class="nav-link collapsed" href="/users/manageBooks">Books<div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div></a>
+                                <a class="nav-link collapsed" href="/users/manageBooks">Books<div
+                                        class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div></a>
                                 <!--<div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" href="login.html">Login</a>
@@ -112,10 +128,11 @@
                                         <a class="nav-link" href="password.html">Forgot Password</a>
                                     </nav>
                                 </div>-->
-                                <a class="nav-link collapsed" href="/users/managePoems" aria-expanded="false" aria-controls="pagesCollapseError">
-                                        Poems
-                                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                                    </a>
+                                <a class="nav-link collapsed" href="/users/managePoems" aria-expanded="false"
+                                    aria-controls="pagesCollapseError">
+                                    Poems
+                                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                                </a>
                                 <!--<div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                     <nav class="sb-sidenav-menu-nested nav">
                                         <a class="nav-link" href="401.html">401 Page</a>
@@ -124,7 +141,8 @@
                                     </nav>
                                 </div>-->
 
-                                <a class="nav-link collapsed" href="/users/manageUsers" aria-expanded="false" aria-controls="pagesCollapseError">
+                                <a class="nav-link collapsed" href="/users/manageUsers" aria-expanded="false"
+                                    aria-controls="pagesCollapseError">
                                     Users
                                     <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                 </a>
@@ -149,13 +167,14 @@
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
-                    <%= user.firstname %> <%= user.lastname %>
+                    <%= user.firstname %>
+                        <%= user.lastname %>
                 </div>
             </nav>
         </div>
         <div id="layoutSidenav_content">
             <main>
-                <div class="container-fluid px-4" >
+                <div class="container-fluid px-4">
                     <h1 class="mt-4">ARABIC CORPUS - ADMIN</h1>
                     <ol class="breadcrumb mb-4" style="background-color: white;">
                         <li class="breadcrumb-item" style="color: black;">F190910@nu.edu.pk</li>
@@ -167,7 +186,7 @@
                         <nav class="nav nav-borders">
                             <a class="nav-link active ms-0" href="/users/editProfileView" target="_self">Profile</a>
                             <a class="nav-link" href="/users/editProfileView/security" target="_self">Security</a>
-                            <a class="nav-link" href=""  target="__blank">Notifications</a>
+                            <a class="nav-link" href="" target="__blank">Notifications</a>
                         </nav>
                         <hr class="mt-0 mb-4">
                         <div class="row">
@@ -179,8 +198,35 @@
                                         <form action="/users/updateRole/<%=user._id%>" method="post">
                                             <!-- Form Group (username)-->
                                             <div class="mb-3">
-                                                <label class="small mb-1" for="inputrole">Role</label>
-                                                <input class="form-control" id="inputrole" type="text" placeholder="Enter your Role" name="role" value="<%= user.role %>">
+
+                                                <p>Change Role:</p>
+
+                                                <input type="radio" name="your_role" id="User" value="User"
+                                                 <%if(user.role=='User'
+                                                    ){%>
+                                                <%="checked"%>
+                                                    <%}%>
+                                                        >
+                                                          <label for="User" style="margin-right: 10%;">User</label>
+
+                                                          <input type="radio" name="your_role" id="Moderator" value="Moderator"
+                                                            <%if(user.role=='Moderator' ){%>
+                                                        <%="checked"%>
+                                                            <%}%>
+                                                                >
+                                                                  <label for="Moderator"
+                                                                    style="margin-right: 10%;">Moderator</label>
+
+
+
+                                                                  <input type="radio" name="your_role" id="Admin" value="Admin"
+                                                                    <%if(user.role=='Admin' ){%>
+                                                                <%="checked"%>
+                                                                    <%}%>
+                                                                        >
+                                                                          <label for="Admin">Admin</label><br>
+
+
                                             </div>
                                             <!-- Save changes button-->
                                             <button class="" id="saveChangebtn" type="submit">Save changes</button>
@@ -208,7 +254,8 @@
             </footer>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
     <script src="../public/js/scripts.js"></script>
 </body>
 
