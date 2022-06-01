@@ -39,7 +39,12 @@ router.get('/dashboard', ensureAuthenticated, (req, res) => res.render('dashboar
 
 
 router.get('/books', ensureAuthenticated, books_controller.show);
+router.get('/books/pdfview', books_controller.showReport);
+router.get('/books/generatepdf', books_controller.allReport);
+
 router.get('/poems', ensureAuthenticated, poems_controller.show);
+router.get('/poems/pdfview', poems_controller.showReport);
+router.get('/poems/generatepdf', poems_controller.allReport);
 
 //Management
 router.get('/manageBooks', ensureAuthenticated, books_controller.showforManaging);
@@ -161,7 +166,7 @@ router.get("/:id/verify/:token/", async(req, res) => {
         });
         if (!token) return res.status(400).send({ message: "Invalid link" });
 
-        await User.updateOne({ _id: user._id, verified: true });
+        await User.findByIdAndUpdate(user._id, { $set: { verified: true } });
         await token.remove();
         req.flash(
             'success_msg',
@@ -169,7 +174,7 @@ router.get("/:id/verify/:token/", async(req, res) => {
         );
         res.redirect('/users/login');
     } catch (error) {
-        res.status(500).send({ message: "Internal Server Error" });
+        res.status(500).send({ message: error });
     }
 });
 
@@ -293,6 +298,7 @@ router.post('/changepassword', (req, res) => {
         });
     }
 });
+
 
 
 module.exports = router;

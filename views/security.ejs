@@ -13,7 +13,10 @@
 <body>
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
         <!-- Navbar Brand-->
-        <a class="navbar-brand ps-3" href="/users/mainscreen"><%= user.firstname %> <%= user.lastname %></a>
+        <a class="navbar-brand ps-3" href="/users/mainscreen">
+            <%= user.firstname %>
+                <%= user.lastname %>
+        </a>
         <!-- Sidebar Toggle-->
         <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
         <!-- Navbar Search-->
@@ -149,13 +152,14 @@
                 </div>
                 <div class="sb-sidenav-footer">
                     <div class="small">Logged in as:</div>
-                    <%= user.firstname %> <%= user.lastname %>
+                    <%= user.firstname %>
+                        <%= user.lastname %>
                 </div>
             </nav>
         </div>
         <div id="layoutSidenav_content">
             <main>
-                <div class="container-fluid px-4" >
+                <div class="container-fluid px-4">
                     <h1 class="mt-4">ARABIC CORPUS - ADMIN</h1>
                     <ol class="breadcrumb mb-4" style="background-color: white;">
                         <li class="breadcrumb-item" style="color: black;">F190910@nu.edu.pk</li>
@@ -165,9 +169,9 @@
                     <div class="container-xl px-4 mt-4">
                         <!-- Account page navigation-->
                         <nav class="nav nav-borders">
-                        <a class="nav-link  ms-0" href="/users/editProfileView" target="_self">Profile</a>
-                        <a class="nav-link active" href="/users/editProfileView/security" target="_self">Security</a>
-                        <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-edit-notifications-page"  target="__blank">Notifications</a>
+                            <a class="nav-link  ms-0" href="/users/editProfileView" target="_self">Profile</a>
+                            <a class="nav-link active" href="/users/editProfileView/security" target="_self">Security</a>
+                            <a class="nav-link" href="https://www.bootdey.com/snippets/view/bs5-edit-notifications-page" target="__blank">Notifications</a>
                         </nav>
                         <hr class="mt-0 mb-4">
                         <div class="row">
