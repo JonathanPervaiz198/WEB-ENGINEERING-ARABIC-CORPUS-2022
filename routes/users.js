@@ -12,6 +12,7 @@ const sendEmail = require("../utils/sendEmail");
 const User = require('../models/User');
 const { forwardAuthenticated, ensureAuthenticated } = require('../config/auth');
 
+const dashboard_controller = require("../controllers/dashboardController");
 const user_controller = require("../controllers/registeredUser.controller");
 const books_controller = require("../controllers/booksController");
 const poems_controller = require("../controllers/poemsController");
@@ -37,7 +38,8 @@ let mail;
 router.get('/mainscreen', ensureAuthenticated, (req, res) => res.render('mainScreen', { user: req.user }));
 
 
-router.get('/dashboard', ensureAuthenticated, (req, res) => res.render('dashboard', { user: req.user }));
+router.get('/dashboard', ensureAuthenticated, dashboard_controller.display);
+router.get('/charts', ensureAuthenticated, (req, res) => res.render('charts', { user: req.user }) );
 
 
 router.get('/books', ensureAuthenticated, books_controller.show);
@@ -49,8 +51,11 @@ router.get('/poems/pdfview', poems_controller.showReport);
 router.get('/poems/generatepdf', poems_controller.allReport);
 
 //Management
-router.get('/manageBooks', ensureAuthenticated, books_controller.showforManaging);let Role;
+router.get('/manageBooks', ensureAuthenticated, books_controller.showforManaging);
+router.get('/manageBooks/:id', ensureAuthenticated, books_controller.delete);
+let Role;
 router.get('/managePoems', ensureAuthenticated, poems_controller.showforManaging);
+router.get('/managePoems/:id', ensureAuthenticated, poems_controller.delete);
 router.get('/manageRoles', ensureAuthenticated, roles_controller.showforManaging);
 
 //Add Ons

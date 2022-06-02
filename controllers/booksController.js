@@ -59,3 +59,9 @@ exports.allReport = (req, res) => {
         );
     });
 };
+
+exports.delete = async(req, res) => {
+    const result = Books.findByIdAndDelete({ _id: req.params.id });
+    result.exec();
+    res.redirect("/users/manageBooks");
+}

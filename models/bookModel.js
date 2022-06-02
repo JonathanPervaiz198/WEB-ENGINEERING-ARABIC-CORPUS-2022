@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { text } = require("pdfkit");
 const Schema = mongoose.Schema;
 
 let BookSchema = new Schema(
@@ -10,6 +11,7 @@ let BookSchema = new Schema(
     pageCount: { type: Number, required: true },
     wordCount: { type: Number, required: true },
     rating: { type: Number, required: true },
+    bookData: { type: String,required: true}
   }
 );
 
